@@ -109,5 +109,32 @@ module "reiya-route-table" {
     }
   ]
 
+}
+
+module "reiya-instance1" {
+  source = "../modules/instance"
+
+  compartment_id = var.compartment_id
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  fingerprint      = var.fingerprint
+  private_key_path = var.private_key_path
+  region           = var.region
+
+  availability_domain = "AD1"
+  display_name = "reiya-server"
+  instance_shape = "VM.Standard.A1.Flex"
+
+  ocpus = 4
+  memory = 24
+
+  ssh_public_key_file = "~/.ssh/id_rsa.pub"
+
+
+  #ubuntu24 https://docs.oracle.com/en-us/iaas/images
+  image_id = "ocid1.image.oc1.ap-singapore-1.aaaaaaaavhhmnucpmj6injeufrxpnzdj7ekglgpr6mqtgylkjorxv2bsfukq"
+
+  boot_volumes_size = 50
+  subnet_id = module.reiya-subnet-public-1.subnet_id
 
 }
