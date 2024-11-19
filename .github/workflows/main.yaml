@@ -14,5 +14,3 @@ jobs:
     - uses: actions/checkout@v4
     - name: Secret Scanning
       uses: trufflesecurity/trufflehog@main
-      with:
-        extra_args: --only-verified
